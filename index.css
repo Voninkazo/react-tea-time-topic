@@ -19,10 +19,9 @@ button {
     cursor: pointer;
 }
 
-
-/* div {
-    padding: 10px;
-} */
+.container {
+    padding: 1rem;
+}
 
 .list-item {
     margin: 1rem;
@@ -32,27 +31,44 @@ button {
     cursor: pointer;
 }
 
-form {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: .5rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.form {
+    display: grid;
+}
+
+.label {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+}
+
+.input {
+    font-size: 1.6rem;
+    padding: 0.5rem 2rem;
+    line-height: 2.8rem;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+#submit {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.75);
+    border-radius: 20px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background-color 250ms;
+}
+
+.submit:hover {
+    background-color: rgba(0, 0, 0, 0.85);
 }
 
 div p {
     font-size: 20px;
     font-weight: bold;
     color: #000000;
-}
-
-input {
-    padding-top: 1rem;
-    border-radius: .5rem;
-    padding-bottom: 1rem;
-    padding-right: 5rem;
-    font-size: 16px;
 }
 
 ::placeholder,
@@ -63,20 +79,6 @@ button {
 ul {
     padding: 0;
     list-style: none;
-}
-
-form button {
-    padding-left: 2rem;
-    padding-top: 1rem;
-    padding-right: 2rem;
-    padding-bottom: 1rem;
-    border-radius: .5rem;
-    border: none;
-    background-color: yellow;
-    color: red;
-    font-weight: bold;
-    cursor: pointer;
-    margin-left: 1rem;
 }
 
 .dislike,
@@ -115,4 +117,15 @@ li.specific {
 .next-topic-container div,
 .discussed-topic-container div {
     margin-top: 1rem;
+}
+
+@media (min-width: 786px) {
+    .form {
+        grid-template-columns: auto 1fr auto;
+        gap: 1rem;
+        align-items: center;
+    }
+    .input {
+        margin-bottom: 0;
+    }
 }
