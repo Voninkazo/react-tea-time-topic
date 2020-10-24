@@ -29941,12 +29941,18 @@ function App() {
   (0, _react.useEffect)(() => {
     getTopics();
   }, []);
-  const [nexTopics, setNextTopics] = (0, _react.useState)([]);
+  let [nextTopics, setNextTopics] = (0, _react.useState)([]);
   (0, _react.useEffect)(() => {
     setNextTopics(allTopics.filter(topic => {
       return topic.discussedOn === "";
     }));
-  }, [allTopics]);
+  }, [allTopics]); // sorting them by the most liked to the least liked
+
+  nextTopics = nextTopics.sort((topic1, topic2) => {
+    const ratio1 = topic1.upvotes - topic1.downvotes;
+    const ratio2 = topic2.upvotes - topic2.downvotes;
+    return ratio2 - ratio1;
+  });
   (0, _react.useEffect)(() => {
     setPreviousTopics(allTopics.filter(topic => {
       return topic.discussedOn !== "";
@@ -29971,7 +29977,7 @@ function App() {
     handleSubmit: handleSubmit
   }), /*#__PURE__*/_react.default.createElement("h3", null, "New Topics"), /*#__PURE__*/_react.default.createElement("div", {
     className: "lists"
-  }, nexTopics.map(topic => {
+  }, nextTopics.map(topic => {
     return /*#__PURE__*/_react.default.createElement(_NewTopics.default, {
       key: topic.id,
       topic: topic
