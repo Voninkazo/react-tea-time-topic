@@ -24,21 +24,18 @@ export default function App() {
     },[])
 
     let [nextTopics, setNextTopics] = useState([])
+    
 
     useEffect(() => {
         setNextTopics( allTopics.filter(topic=> {
             return(topic.discussedOn === "")
+        }).sort((topic1, topic2) => {
+            const ratio1 = topic1.upvotes - topic1.downvotes;
+            const ratio2 = topic2.upvotes - topic2.downvotes;
+            return ratio2 - ratio1;
         }))
     },[allTopics])
 
-
-    // sorting them by the most liked to the least liked
-	nextTopics = nextTopics.sort((topic1, topic2) => {
-		const ratio1 = topic1.upvotes - topic1.downvotes;
-		const ratio2 = topic2.upvotes - topic2.downvotes;
-		return ratio2 - ratio1;
-    });
-    
     useEffect(() => {
         setPreviousTopics(allTopics.filter(topic=> {
         return(topic.discussedOn !== "")
@@ -51,10 +48,19 @@ export default function App() {
         console.log(idToDelete);
         setPreviousTopics(previousTopics.filter(topic => topic.id !== idToDelete))
     }
-
+    
      function handleSubmit(e) {
         e.preventDefault();
         console.log("Submitted");
+        // create a new object 
+        const newTopic ={
+            id: Date.now(),
+            title: "",
+            upvotes:0,
+            downvotes:0,
+        }
+        setNextTopics([...nextTopics], newTopic)
+        console.log(newTopic);
     }
 
     return(

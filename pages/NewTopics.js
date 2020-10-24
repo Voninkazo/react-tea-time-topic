@@ -5,20 +5,22 @@ import IconDislike from '../icons/dislike.svg';
 
 export default function NewTopics({topic}) {
 
-    const likeVotes = topic.upvotes;
-    const dislikeVotes = topic.downvotes;
+    let likeVotes = topic.upvotes;
+    let dislikeVotes = topic.downvotes;
 
     const [upVotes, setUpVotes] = useState(likeVotes);
 
    function handleUpvotes() {
     console.log("I'm in handleUpvotes function");
     setUpVotes(upVotes + 1);
+    console.log(upVotes)
 }
 
     const [downVotes, setDownVotes] = useState(dislikeVotes);
     function handleDownVotes() {
         setDownVotes(downVotes + 1);
     }
+    
     return(
             <ul>
                 <li>
