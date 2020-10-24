@@ -29789,11 +29789,14 @@ var _delete = _interopRequireDefault(require("../icons/delete.svg"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function DiscussedTopics({
-  topic
+  topic,
+  handleDelete
 }) {
-  return /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("p", null, topic.title), /*#__PURE__*/_react.default.createElement("p", {
+  console.log(handleDelete);
+  return /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("p", null, topic.title), /*#__PURE__*/_react.default.createElement("button", {
     className: "remove",
-    datatype: topic.id
+    value: topic.id,
+    onClick: handleDelete
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: _delete.default,
     alt: ""
@@ -29879,9 +29882,10 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function FormComponent() {
+function FormComponent(props) {
   return /*#__PURE__*/_react.default.createElement("form", {
-    className: "form"
+    className: "form",
+    onSubmit: props.handleSubmit
   }, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "topic",
     className: "label"
@@ -29921,6 +29925,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function App() {
   const url = "https://gist.githubusercontent.com/Pinois/93afbc4a061352a0c70331ca4a16bb99/raw/6da767327041de13693181c2cb09459b0a3657a1/topics.json";
   const [allTopics, setAllTopics] = (0, _react.useState)([]);
+  const [previousTopics, setPreviousTopics] = (0, _react.useState)([]);
 
   const getTopics = async () => {
     try {
@@ -29936,27 +29941,48 @@ function App() {
   (0, _react.useEffect)(() => {
     getTopics();
   }, []);
-  const newTopics = allTopics.filter(topic => {
-    return topic.discussedOn === "";
-  });
-  const discussedTopics = allTopics.filter(topic => {
-    return topic.discussedOn !== "";
-  });
+  const [nexTopics, setNextTopics] = (0, _react.useState)([]);
+  (0, _react.useEffect)(() => {
+    setNextTopics(allTopics.filter(topic => {
+      return topic.discussedOn === "";
+    }));
+  }, [allTopics]);
+  (0, _react.useEffect)(() => {
+    setPreviousTopics(allTopics.filter(topic => {
+      return topic.discussedOn !== "";
+    }));
+  }, [allTopics]);
+
+  function handleDelete(e) {
+    console.log("deleted");
+    const idToDelete = e.target.value;
+    console.log(idToDelete);
+    setPreviousTopics(previousTopics.filter(topic => topic.id !== idToDelete));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("Submitted");
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "container"
-  }, /*#__PURE__*/_react.default.createElement(_FormComponent.default, null), /*#__PURE__*/_react.default.createElement("h3", null, "New Topics"), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement(_FormComponent.default, {
+    handleSubmit: handleSubmit
+  }), /*#__PURE__*/_react.default.createElement("h3", null, "New Topics"), /*#__PURE__*/_react.default.createElement("div", {
     className: "lists"
-  }, newTopics.map(topic => {
+  }, nexTopics.map(topic => {
     return /*#__PURE__*/_react.default.createElement(_NewTopics.default, {
       key: topic.id,
       topic: topic
     });
   })), /*#__PURE__*/_react.default.createElement("h3", null, "Discussed Topics"), /*#__PURE__*/_react.default.createElement("div", {
     className: "lists"
-  }, discussedTopics.map(topic => {
+  }, previousTopics.map(topic => {
     return /*#__PURE__*/_react.default.createElement(_DiscussedTopics.default, {
       key: topic.id,
-      topic: topic
+      topic: topic,
+      handleDelete: handleDelete
     });
   })));
 }

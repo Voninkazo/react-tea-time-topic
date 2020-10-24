@@ -2,15 +2,15 @@ import React from 'react';
 import IconDelete from '../icons/delete.svg';
 
 
-export default function DiscussedTopics({topic}) {
-
+export default function DiscussedTopics({topic,handleDelete}) {
+    console.log(handleDelete)
     return(
         <ul>
             <li>
                 <p>{topic.title}</p>
-                <p className="remove" datatype={topic.id}>
+                <button className="remove" value={topic.id} onClick={handleDelete}>
                 <img src={IconDelete} alt=""/>
-                </p>
+                </button>
             </li>
             <li><p>{topic.discussedOn}</p></li>
         </ul>

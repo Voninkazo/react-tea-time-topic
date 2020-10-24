@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function FormComponent() {
+export default function FormComponent(props) {
     return (
-            <form className="form">
+            <form className="form" onSubmit={props.handleSubmit}>
                 <label htmlFor="topic" className="label">Add a new topic</label>
                 <input type="text"
                  name="topic" 
