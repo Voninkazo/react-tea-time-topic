@@ -3,7 +3,7 @@ import IconArchaive from '../icons/archaive.svg';
 import IconLike from '../icons/like.svg';
 import IconDislike from '../icons/dislike.svg';
 
-export default function NewTopics({topic}) {
+export default function NewTopics({topic, archaiving, allTopics,setAllTopics}) {
 
     let likeVotes = topic.upvotes;
     let dislikeVotes = topic.downvotes;
@@ -13,19 +13,21 @@ export default function NewTopics({topic}) {
    function handleUpvotes() {
     console.log("I'm in handleUpvotes function");
     setUpVotes(upVotes + 1);
-    console.log(upVotes)
+    console.log(upVotes);
+    setAllTopics([...allTopics])
 }
 
     const [downVotes, setDownVotes] = useState(dislikeVotes);
     function handleDownVotes() {
         setDownVotes(downVotes + 1);
+        setAllTopics([...allTopics])
     }
     
     return(
             <ul>
                 <li>
                     <p>{topic.title}</p>
-                    <p className="archaive" value={topic.id}>
+                    <p className="archaive" value={topic.id} onClick={archaiving}>
                     <img src={IconArchaive} alt=""/>
                     </p>
                 </li>

@@ -3,7 +3,7 @@ import IconDelete from '../icons/delete.svg';
 
 
 export default function DiscussedTopics({topic,handleDelete}) {
-    console.log(handleDelete)
+    // console.log(handleDelete)
     return(
         <ul>
             <li>

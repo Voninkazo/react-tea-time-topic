@@ -27,6 +27,10 @@ button {
     margin: 1rem;
 }
 
+.archaive {
+    cursor: pointer;
+}
+
 .remove img {
     cursor: pointer;
 }
