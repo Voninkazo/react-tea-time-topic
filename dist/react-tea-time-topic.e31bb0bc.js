@@ -29772,9 +29772,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"icons/delete.svg":[function(require,module,exports) {
-module.exports = "/delete.491a0fad.svg";
-},{}],"pages/DiscussedTopics.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"pages/DiscussedTopics.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29784,8 +29782,6 @@ exports.default = DiscussedTopics;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _delete = _interopRequireDefault(require("../icons/delete.svg"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function DiscussedTopics({
@@ -29793,16 +29789,26 @@ function DiscussedTopics({
   handleDelete
 }) {
   // console.log(handleDelete)
+  const discussedOnDate = new Date(Number(topic.discussedOn));
   return /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("p", null, topic.title), /*#__PURE__*/_react.default.createElement("button", {
     className: "remove",
     value: topic.id,
     onClick: handleDelete
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: _delete.default,
-    alt: ""
-  }))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("p", null, topic.discussedOn)));
+  }, /*#__PURE__*/_react.default.createElement("svg", {
+    width: "17",
+    height: "19",
+    viewBox: "0 0 17 19",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    d: "M1.5 5.125H15.5M14.625 5.125L13.8664 15.7493C13.8349 16.1908 13.6374 16.604 13.3135 16.9056C12.9896 17.2073 12.5634 17.375 12.1208 17.375H4.87925C4.43662 17.375 4.01043 17.2073 3.68652 16.9056C3.36262 16.604 3.16505 16.1908 3.13363 15.7493L2.375 5.125H14.625ZM6.75 8.625V13.875V8.625ZM10.25 8.625V13.875V8.625ZM11.125 5.125V2.5C11.125 2.26794 11.0328 2.04538 10.8687 1.88128C10.7046 1.71719 10.4821 1.625 10.25 1.625H6.75C6.51794 1.625 6.29538 1.71719 6.13128 1.88128C5.96719 2.04538 5.875 2.26794 5.875 2.5V5.125H11.125Z",
+    stroke: "#C4C4C4",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("p", null, discussedOnDate.toLocaleDateString())));
 }
-},{"react":"node_modules/react/index.js","../icons/delete.svg":"icons/delete.svg"}],"icons/archaive.svg":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"icons/archaive.svg":[function(require,module,exports) {
 module.exports = "/archaive.12f424d7.svg";
 },{}],"icons/like.svg":[function(require,module,exports) {
 module.exports = "/like.80943052.svg";
@@ -29857,7 +29863,7 @@ function NewTopics({
   return /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("p", null, topic.title), /*#__PURE__*/_react.default.createElement("p", {
     className: "archaive",
     value: topic.id,
-    onClick: archaiving
+    onClick: () => archaiving(topic.id)
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: _archaive.default,
     alt: ""
@@ -29952,7 +29958,7 @@ function App() {
   }, []);
   (0, _react.useEffect)(() => {
     setPreviousTopics(allTopics.filter(topic => topic.discussedOn !== ""));
-  }, [allTopics]);
+  }, [allTopics]); // delete opics
 
   function handleDelete(e) {
     console.log("deleted");
@@ -29965,13 +29971,15 @@ function App() {
     setNextTopics(allTopics.filter(topic => {
       return topic.discussedOn === "";
     }));
-  }, [allTopics]);
+  }, [allTopics]); // archaive discussed topic
 
-  function archaiving(e) {
-    // const topicToArchive = allTopics.find(topic => topic.id = id);
-    console.log(nextTopics.discussedOn = Date.now());
+  function archaiving(id) {
+    const topicToArchive = allTopics.find(topic => topic.id === id);
+    console.log(topicToArchive);
+    topicToArchive.discussedOn = Date.now();
     setAllTopics([...allTopics]);
-  }
+  } // submit new topics
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -30056,7 +30064,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51821" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55944" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -31,8 +31,12 @@ button {
     cursor: pointer;
 }
 
-.remove img {
+.remove {
     cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+    display: block;
 }
 
 .form {
@@ -95,6 +99,7 @@ div>ul li:nth-of-type(1) {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: baseline;
 }
 
 div>ul li:nth-of-type(2) {
@@ -112,10 +117,9 @@ li.specific {
 }
 
 .lists>ul {
-    margin: 1rem;
     background-color: #ffffff;
     border-radius: .5rem;
-    padding: 1rem;
+    padding: 1rem 1rem;
 }
 
 .next-topic-container div,

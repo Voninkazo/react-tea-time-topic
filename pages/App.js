@@ -28,6 +28,8 @@ export default function App() {
         setPreviousTopics(allTopics.filter(topic=>topic.discussedOn !== ""))
     }, [allTopics])
 
+    // delete opics
+
     function handleDelete(e) {
         console.log("deleted");
         const idToDelete = e.target.value;
@@ -41,13 +43,15 @@ export default function App() {
                         }))
     },[allTopics])
 
-    
-    function archaiving(e) {
-        // const topicToArchive = allTopics.find(topic => topic.id = id);
-      console.log( nextTopics.discussedOn = Date.now())
+    // archaive discussed topic
+    function archaiving(id) {
+        const topicToArchive = allTopics.find(topic => topic.id === id);
+        console.log(topicToArchive);
+      topicToArchive.discussedOn = Date.now();
         setAllTopics([...allTopics]);
     }
 
+    // submit new topics
     
     function handleSubmit(e) {
         e.preventDefault();

@@ -27,7 +27,7 @@ export default function NewTopics({topic, archaiving, allTopics,setAllTopics}) {
             <ul>
                 <li>
                     <p>{topic.title}</p>
-                    <p className="archaive" value={topic.id} onClick={archaiving}>
+                    <p className="archaive" value={topic.id} onClick={() => archaiving(topic.id)}>
                     <img src={IconArchaive} alt=""/>
                     </p>
                 </li>
